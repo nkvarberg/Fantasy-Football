@@ -10,7 +10,7 @@ ffa <- ffa %>% group_by(Pos) %>% arrange(DP) %>%
 #Attributes of snake draft
 positions       <- c('QB', 'RB', 'WR', 'TE')
 PICKS_PER_ROUND <- 8
-my_picks        <- c(6,11,22,27,38,43,54,59,70)
+my_picks        <- c(3,14,19,30,35,46,51,62,67)
 # My last pick is the replacement level pick
 REPL_PICK       <- tail(my_picks,1) 
 # Replaceent points are max points you could get at that position in the last round
@@ -23,37 +23,28 @@ ffa <- mutate(ffa, points_arp = ifelse(Pos=='RB', Points-RB_REPL_POINTS,
                                 ifelse(Pos=='WR', Points-WR_REPL_POINTS,
                                 ifelse(Pos=='TE', Points-TE_REPL_POINTS, 0)
                                 ))))
-tbl_list <- c()
-for (pick in my_picks){
-  # Filter to plyers in the next 2 rounds after pick
-  pick_vals <- ffa %>% 
-    filter(DP>=pick & DP <= pick+2*PICKS_PER_ROUND) %>% 
-    group_by(Pos) %>% 
-    filter(points_arp == max(points_arp)) %>%
-    mutate(pick = pick) %>%
-    mutate(posvalue = (points_arp - max(points_arp))) %>%
-    select(pick, Player, Pos, posrank, Points, DP, points_arp, posvalue) %>%
-    arrange(desc(points_arp)) %>%
-    ungroup() %>%
-    mutate(points_arp_value = (points_arp - mean(points_arp)))
-  tbl_list <- c(tbl_list, pick_vals)
-  #row_add <- c(max_vals$QB, max_vals$RB, max_vals$WR, max_vals$TE)
-  #for(pos in 'RB'){
-    # Filter to the players at the position of interest
-    #pot_players_pos <- filter(pot_players, Pos==pos)
-    #if (dim(pot_players_pos[1] > 0)){
-    #  max_points_pos <- max(pot_players_pos$Points)
-    #}
-    #else{
-    #  max_points_pos = NA
-    #}
-  #}
+
+# Function to return values for each position at each pick with the players remaining
+get_pick_values <- function(players_avail, my_picks_remain){
+  for (pick in my_picks){
+    # Filter to plyers in the next 2 rounds after pick
+    df <- players_avail %>% 
+      filter(DP>=pick & DP <= pick+2*PICKS_PER_ROUND) %>% 
+      group_by(Pos) %>% 
+      filter(points_arp == max(points_arp)) %>%
+      mutate(pick = pick) %>%
+      select(pick, Player, Pos, posrank, Points, DP, points_arp) %>%
+      arrange(desc(points_arp)) %>%
+      ungroup() %>%
+      mutate(value = (points_arp - round(mean(points_arp),2)))
+    if (pick == my_picks[1]){
+      pick_values <- df
+    }
+    else{
+      pick_values <- full_join(pick_values, df)
+    }
+  }
+  return(pick_values)
 }
+pick_values     <- get_pick_values(ffa, my_picks)
 
-
-
-# Nick: create function, linear or logistic for points expected at pick.
-#  Then calculate points above expected at the pick.
-
-# In general our goal is to optimize set of players at position 
-#  i.e. draft RBs in 1st, 3rd, 5th, and 6th rounds.
