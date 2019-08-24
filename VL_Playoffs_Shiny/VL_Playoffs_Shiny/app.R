@@ -8,26 +8,30 @@
 #
 
 library(shiny)
+library(DT)
+library(data.table)
+library(tibble)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
    
    # Application title
-   titlePanel("Old Faithful Geyser Data"),
+   titlePanel(h1("Varberg-Lindquist Playoff Predictions", align = 'center')),
    
    # Sidebar with a slider input for number of bins 
-   sidebarLayout(
+   sidebarLayout(position = 'right',
       sidebarPanel(
          sliderInput("bins",
                      "Number of bins:",
                      min = 1,
                      max = 50,
-                     value = 30)
+                     value = 30),
+         actionButton("preseason", label = "Preseason")
       ),
       
       # Show a plot of the generated distribution
-      mainPanel(
-         plotOutput("distPlot")
+      mainPanel(h3("2019 Predictions", align = 'center'),
+          DT::dataTableOutput("preds2019")
       )
    )
 )
@@ -35,14 +39,14 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
    
-   output$distPlot <- renderPlot({
-      # generate bins based on input$bins from ui.R
-      x    <- faithful[, 2] 
-      bins <- seq(min(x), max(x), length.out = input$bins + 1)
-      
-      # draw the histogram with the specified number of bins
-      hist(x, breaks = bins, col = 'darkgray', border = 'white')
+   output$preds2019 <- DT::renderDataTable({
+     df <- fread("/Users/nickvarberg/Desktop/Life/Fantasy-Football/VL_predictions_week_5.csv")
+     df <- df %>% column_to_rownames(., 'Owner')
+     df2 <- datatable(df, options = list(dom = 't'))
+     return(df2)
    })
+   
+   
 }
 
 # Run the application 
