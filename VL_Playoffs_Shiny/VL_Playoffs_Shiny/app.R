@@ -11,6 +11,8 @@ library(shiny)
 library(DT)
 library(data.table)
 library(tibble)
+library(scales)
+library(dplyr)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -26,7 +28,8 @@ ui <- fluidPage(
       
       # Show a plot of the generated distribution
       mainPanel(h3("2019 Predictions", align = 'center'),
-          DT::dataTableOutput("preds2019")
+          DT::dataTableOutput("preds2019")#,
+          #plotOutput("predshistoryplot")
       )
    )
 )
@@ -36,10 +39,21 @@ server <- function(input, output) {
    
    output$preds2019 <- DT::renderDataTable({
      df <- fread("/Users/nickvarberg/Desktop/Life/Fantasy-Football/VL_predictions_week_5.csv")
-     df <- df %>% column_to_rownames(., 'Owner')
+     df <- df %>% arrange(desc(Champion)) %>% column_to_rownames(., 'Owner')
+     # Change to percentage formats
+     for (col in c('Playoffs', 'Semifinals', 'Finals', 'Champion')){
+       df[col] <- percent(unlist(df[col]/100))
+     }
      df2 <- datatable(df, options = list(dom = 't'))
      return(df2)
    })
+   #output$predshistoryplot <- renderPlot({
+  #   week4 <- fread("/Users/nickvarberg/Desktop/Life/Fantasy-Football/VL_predictions_week_4.csv")
+  #   week5 <- fread("/Users/nickvarberg/Desktop/Life/Fantasy-Football/VL_predictions_week_5.csv")
+  #   week4 <- week4 %>% column_to_rownames(., 'Owner')
+  #   df2 <- datatable(df, options = list(dom = 't'))
+  #   return(df2)
+  # })
    
    
 }
