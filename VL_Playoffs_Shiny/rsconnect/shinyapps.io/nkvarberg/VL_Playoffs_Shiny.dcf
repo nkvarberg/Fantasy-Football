@@ -1,0 +1,12 @@
+name: VL_Playoffs_Shiny
+title: VL_Playoffs_Shiny
+username:
+account: nkvarberg
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1149014
+bundleId: 2386389
+url: https://nkvarberg.shinyapps.io/VL_Playoffs_Shiny/
+when: 1567643923.79976
+asMultiple: FALSE
+asStatic: FALSE
