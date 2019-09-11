@@ -42,26 +42,29 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
    
+  WEEK = 1
+  
    output$preds2019 <- DT::renderDataTable({
-     df <- fread("MV_predictions_week_1_2019.csv")
-     df <- df %>% select(-ID) %>% mutate('Playoffs' = percent(Playoffs)) %>% 
-       mutate('Semifinals' = percent(Semifinals)) %>%
-       mutate('Finals' = percent(Finals)) %>%
-       mutate('Champion' = percent(Champion))
+     filename = paste0("MV_predictions_week_",toString(WEEK),"_2019.csv")
+     df <- fread(filename)
+     df <- df %>% select(-ID) %>% 
+       rename('Proj. PPG' = proj_ppg) %>%
+       mutate('Playoffs' = percent(Playoffs, accuracy=2)) %>% 
+       mutate('Semifinals' = percent(Semifinals, accuracy=2)) %>%
+       mutate('Finals' = percent(Finals, accuracy=2)) %>%
+       mutate('Champion' = percent(Champion, accuracy=2))
      df <- datatable(df, options = list(dom = 't', pageLength = 12, width="100%") )
      return(df)
    })
    
    output$Historyplot <- renderPlot({
      history <- fread("MV_predictions_history_2019.csv")
-     history <- history %>% select(-ID) %>% mutate('Playoffs' = percent(Playoffs)) %>% 
-       mutate('Semifinals' = percent(Semifinals)) %>%
-       mutate('Finals' = percent(Finals)) %>%
-       mutate('Champion' = percent(Champion))
+     history <- history %>% select(Week, Playoffs, Owner) %>% 
+       mutate('Playoffs' = percent(Playoffs, accuracy=2)) 
      p <- ggplot(history, aes(x=Week, y=Playoffs, group=Owner) ) + 
        geom_line(aes(color=Owner)) +
-       geom_point(aes(color=Owner)) #+
-       #scale_x_discrete(breaks=0:11, labels=waiver())
+       geom_point(aes(color=Owner)) +
+       scale_x_continuous(breaks=0:WEEK, labels=waiver())
      return(p)
    })
    
