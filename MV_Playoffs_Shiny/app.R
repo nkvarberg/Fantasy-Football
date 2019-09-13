@@ -13,7 +13,8 @@ library(data.table)
 library(tibble)
 library(scales)
 library(dplyr)
-library(ggplot2)
+#library(ggplot2)
+library(plotly)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -43,30 +44,41 @@ ui <- fluidPage(
 server <- function(input, output) {
    
   WEEK = 1
+  LEAGUE = 'MV'
   
    output$preds2019 <- DT::renderDataTable({
-     filename = paste0("MV_predictions_week_",toString(WEEK),"_2019.csv")
+     filename = paste0(LEAGUE,"_predictions_week_",toString(WEEK),"_2019.csv")
      df <- fread(filename)
      df <- df %>% select(-ID) %>% 
-       rename('Proj. PPG' = proj_ppg) %>%
-       mutate('Playoffs' = percent(Playoffs, accuracy=2)) %>% 
-       mutate('Semifinals' = percent(Semifinals, accuracy=2)) %>%
-       mutate('Finals' = percent(Finals, accuracy=2)) %>%
-       mutate('Champion' = percent(Champion, accuracy=2))
-     df <- datatable(df, options = list(dom = 't', pageLength = 12, width="100%") )
+       rename('Proj_PPG' = proj_ppg) %>%
+       mutate(Proj_PPG = round(Proj_PPG, 1)) %>%
+       mutate('Playoffs' = percent(Playoffs, accuracy=1)) %>% 
+       mutate('Semifinals' = percent(Semifinals, accuracy=1)) %>%
+       mutate('Finals' = percent(Finals, accuracy=1)) %>%
+       mutate('Champion' = percent(Champion, accuracy=1))
+     df <- DT::datatable(df, options = list(dom = 't', pageLength = 12, width="100%",scrollX = TRUE, 
+                                            paging=FALSE,
+                                            fixedHeader=TRUE,
+                                            fixedColumns = list(leftColumns = 1, rightColumns = 0)) )
      return(df)
    })
    
-   output$Historyplot <- renderPlot({
-     history <- fread("MV_predictions_history_2019.csv")
-     history <- history %>% select(Week, Playoffs, Owner) %>% 
-       mutate('Playoffs' = percent(Playoffs, accuracy=2)) 
-     p <- ggplot(history, aes(x=Week, y=Playoffs, group=Owner) ) + 
-       geom_line(aes(color=Owner)) +
+  output$Historyplot <- renderPlot({
+     history <- fread(paste0(LEAGUE,"_predictions_history_2019.csv"))
+     history <- history %>% select(Week, Playoffs, Owner) %>%
+       mutate(Playoffs = Playoffs*100)
+     # try dynamic legend
+     p <- ggplot(history,aes(x=Week, y=Playoffs, group=Owner), show.legend = FALSE) + 
+       geom_line(aes(color=Owner)) + 
        geom_point(aes(color=Owner)) +
-       scale_x_continuous(breaks=0:WEEK, labels=waiver())
+       theme_minimal() +
+       geom_text(hjust = 0, nudge_x = 0.05, aes(label=Owner)) +
+       scale_x_continuous(limits = c(0,WEEK+0.5), breaks=0:WEEK, labels=waiver()) +
+       scale_y_continuous(name = 'Playoffs %', limits = c(0,100)) +
+       theme(legend.position = "none")
      return(p)
-   })
+  })
+  
    
    
 }
