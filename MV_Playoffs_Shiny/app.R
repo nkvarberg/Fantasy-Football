@@ -7,6 +7,9 @@
 #    http://shiny.rstudio.com/
 #
 
+WEEK = 1
+LEAGUE = 'MV'
+
 library(shiny)
 library(DT)
 library(data.table)
@@ -15,6 +18,7 @@ library(scales)
 library(dplyr)
 #library(ggplot2)
 library(plotly)
+library(tidyr)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -32,7 +36,10 @@ ui <- fluidPage(
                    season 30,000 times to determine how far each team is likely to go.", align = 'center'),
                 
                 tabsetPanel(
-                  tabPanel("Current Prediction", DT::dataTableOutput("preds2019")), 
+                  tabPanel("Current Prediction", div(DT::dataTableOutput("preds2019"),
+                                                     style = "font-size: 80%; width: 10%"
+                                                     )
+                           ), 
                   tabPanel("Prediction History", plotOutput("Historyplot"))
                 )
           #,
@@ -42,24 +49,26 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-   
-  WEEK = 1
-  LEAGUE = 'MV'
   
    output$preds2019 <- DT::renderDataTable({
      filename = paste0(LEAGUE,"_predictions_week_",toString(WEEK),"_2019.csv")
      df <- fread(filename)
-     df <- df %>% select(-ID) %>% 
+     df <- df %>% select(-c(ID,Team)) %>% 
+       unite('Rec',c(Wins,Losses), sep='-', remove=TRUE) %>%
        rename('Proj_PPG' = proj_ppg) %>%
        mutate(Proj_PPG = round(Proj_PPG, 1)) %>%
        mutate('Playoffs' = percent(Playoffs, accuracy=1)) %>% 
        mutate('Semifinals' = percent(Semifinals, accuracy=1)) %>%
        mutate('Finals' = percent(Finals, accuracy=1)) %>%
        mutate('Champion' = percent(Champion, accuracy=1))
-     df <- DT::datatable(df, options = list(dom = 't', pageLength = 12, width="100%",scrollX = TRUE, 
-                                            paging=FALSE,
-                                            fixedHeader=TRUE,
-                                            fixedColumns = list(leftColumns = 1, rightColumns = 0)) )
+     df <- DT::datatable(df,
+                         options = list(dom = 't', pageLength = 12,
+                                            fixedColumns = list(leftColumns = 1, rightColumns = 0),
+                                            autoWidth = TRUE,
+                                            columnDefs = list( list( className = 'dt-center', targets = 1:7),
+                                                               list(width = '100px', targets = "_all"))
+                                            )
+                         )
      return(df)
    })
    
@@ -72,7 +81,8 @@ server <- function(input, output) {
        geom_line(aes(color=Owner)) + 
        geom_point(aes(color=Owner)) +
        theme_minimal() +
-       geom_text(hjust = 0, nudge_x = 0.05, aes(label=Owner)) +
+       geom_text(data=subset(history, Week == max(Week)),
+                 hjust = 0, nudge_x = rep_len(c(0.03,.2),length(unique(Owner))), aes(label=Owner)) +
        scale_x_continuous(limits = c(0,WEEK+0.5), breaks=0:WEEK, labels=waiver()) +
        scale_y_continuous(name = 'Playoffs %', limits = c(0,100)) +
        theme(legend.position = "none")
