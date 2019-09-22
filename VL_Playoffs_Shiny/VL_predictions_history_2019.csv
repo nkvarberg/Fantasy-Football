@@ -1,9 +1,25 @@
-ID,Owner,Team,proj_ppg,Playoffs,Semifinals,Finals,Champion,Week
-3,Jord,I Have Adrian ... Again,124.0,91%,56%,29%,16%,1
-6,Tim,Team Tim,123.8,90%,55%,29%,15%,1
-5,Tom,Kirk and Dak LLC,123.0,89%,52%,27%,14%,1
-1,Nick,"Josh Allen 1:9, Be strong and..",122.3,88%,51%,25%,13%,1
-2,Zach,Winning is just my Forte,122.5,88%,50%,25%,12%,1
-4,Drew,U of Cal - Berk Oski the Bear,121.4,86%,48%,23%,11%,1
-7,nath,Kelce  Kapistrant,120.4,84%,44%,21%,10%,1
-8,Tmmy,Steak  Dinner,120.2,83%,44%,21%,10%,1
+ID,Owner,Team,Wins,Losses,proj_ppg,Playoffs,Semifinals,Finals,Champion,Week
+1,Nick,"Josh Allen 1:9, Be strong and",0.0,0.0,122.3,0.88,0.51,0.25,0.13,0
+2,Zach,I’ll ride with  Mahomie,0.0,0.0,122.5,0.88,0.5,0.25,0.12,0
+3,Jordan,Breesy Sundays,0.0,0.0,124.0,0.91,0.56,0.29,0.16,0
+6,Tim,Team Tim,0.0,0.0,123.8,0.9,0.55,0.29,0.15,0
+5,Tom,Cam and Dak C and D,0.0,0.0,123.0,0.89,0.52,0.27,0.14,0
+7,Nathan,Kelce  Kapistrant,0.0,0.0,120.4,0.84,0.44,0.21,0.1,0
+4,Andrew,Basic White Quarterbacks,0.0,0.0,121.4,0.86,0.48,0.23,0.11,0
+8,Timmy,Steak  Dinner,0.0,0.0,120.2,0.83,0.44,0.21,0.1,0
+1,Nick,"Josh Allen 1:9, Be strong and",1.0,0.0,135.5,0.99,0.82,0.53,0.34,1
+7,Nathan,Kelce  Kapistrant,1.0,0.0,128.72,0.98,0.67,0.36,0.18,1
+2,Zach,I’ll ride with  Mahomie,1.0,0.0,127.86,0.98,0.66,0.34,0.17,1
+6,Tim,Team Tim,1.0,0.0,124.22,0.96,0.56,0.26,0.12,1
+3,Jordan,Breesy Sundays,0.0,1.0,123.14,0.89,0.45,0.2,0.09,1
+5,Tom,Cam and Dak C and D,0.0,1.0,117.53,0.79,0.33,0.13,0.04,1
+8,Timmy,Steak  Dinner,0.0,1.0,115.37,0.72,0.27,0.09,0.03,1
+4,Andrew,Basic White Quarterbacks,0.0,1.0,114.65,0.68,0.24,0.08,0.03,1
+1,Nick,"Josh Allen 1:9, Be strong and",2.0,0.0,135.61,0.99,0.77,0.48,0.28,2
+2,Zach,I’ll ride with  Mahomie,2.0,0.0,128.76,0.98,0.68,0.37,0.19,2
+3,Jordan,Breesy Sundays,1.0,1.0,123.08,0.93,0.54,0.26,0.13,2
+6,Tim,Team Tim,1.0,1.0,122.68,0.92,0.53,0.25,0.12,2
+7,Nathan,Kelce  Kapistrant,1.0,1.0,117.99,0.89,0.45,0.2,0.09,2
+5,Tom,Cam and Dak C and D,1.0,1.0,115.05,0.86,0.4,0.16,0.07,2
+4,Andrew,Basic White Quarterbacks,0.0,2.0,115.73,0.77,0.36,0.16,0.07,2
+8,Timmy,Steak  Dinner,0.0,2.0,110.39,0.67,0.28,0.11,0.04,2
