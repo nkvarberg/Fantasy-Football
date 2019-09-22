@@ -53,7 +53,7 @@ ui <- fluidPage(
     # Show a plot of the generated distribution
     mainPanel(
       
-      h2("Takes 12 To Tango 2019 Playoff Predictions", align = 'center'),
+      h2("Varberg-Lindquist 2019 Playoff Predictions", align = 'center'),
       
         h3("How these predictions work:", align = 'center'),
               
