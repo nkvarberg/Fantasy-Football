@@ -13,7 +13,7 @@ I blend each team's preseaon player projections wtih the team's performance thro
 
 Here is what the homepage looks like:
 
-![homepage](https://github.com/nkvarberg/Fantasy-Football/blob/master/Screenshots/Homepage.png)
+![homepage](https://github.com/nkvarberg/Fantasy-Football/blob/master/Screenshots/Homepageright.png)
 
 
 I show how predictions for each team's playoff chances have changed over time:
