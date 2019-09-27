@@ -84,10 +84,10 @@ server <- function(input, output) {
        unite('Rec',c(Wins,Losses), sep='-', remove=TRUE) %>%
        rename('Proj_PPG' = proj_ppg) %>%
        mutate(Proj_PPG = round(Proj_PPG, 1)) %>%
-       mutate('Playoffs' = percent(Playoffs, accuracy=1)) %>% 
-       mutate('Semifinals' = percent(Semifinals, accuracy=1)) %>%
-       mutate('Finals' = percent(Finals, accuracy=1)) %>%
-       mutate('Champion' = percent(Champion, accuracy=1))
+       mutate('Playoffs' = percent(Playoffs, accuracy=.1)) %>% 
+       mutate('Semifinals' = percent(Semifinals, accuracy=.1)) %>%
+       mutate('Finals' = percent(Finals, accuracy=.1)) %>%
+       mutate('Champion' = percent(Champion, accuracy=.1))
      currentDT <- DT::datatable(current,
                          options = list(dom = 't', pageLength = 12,
                                             fixedColumns = list(leftColumns = 1, rightColumns = 0),

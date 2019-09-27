@@ -5,8 +5,8 @@ account: nkvarberg
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1149014
-bundleId: 2433511
+bundleId: 2442550
 url: https://nkvarberg.shinyapps.io/VL_Playoffs_Shiny/
-when: 1569120051.39851
+when: 1569377077.21273
 asMultiple: FALSE
 asStatic: FALSE
