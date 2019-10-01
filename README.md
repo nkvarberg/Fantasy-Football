@@ -20,6 +20,7 @@ I show how predictions for each team's playoff chances have changed over time:
 
 ![playoffs](https://github.com/nkvarberg/Fantasy-Football/blob/master/Screenshots/Playoffs.png)
 
-I also show how predictions for each team's championship chances have changed over time:
-
-![champ](https://github.com/nkvarberg/Fantasy-Football/blob/master/Screenshots/Championship.png)
+### Future Features
+Predictions for who each team will keep in keeper league.
+Player rater that has rest-of-season and keeper values for each player.
+Historical draft-rater and waivers-rater for each manager in league.
