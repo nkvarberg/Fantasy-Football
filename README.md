@@ -22,5 +22,7 @@ I show how predictions for each team's playoff chances have changed over time:
 
 ### Future Features
 Predictions for who each team will keep in keeper league.
+
 Player rater that has rest-of-season and keeper values for each player.
+
 Historical draft-rater and waivers-rater for each manager in league.
