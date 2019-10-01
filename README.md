@@ -4,8 +4,6 @@ Optimized drafting and playoff projections for ESPN Fantasy Football Leagues
 ### Preseason Projections 
 Preseason player projections are from fantasyfootballanalytics.net, who average projections from several fantasy football experts.
 
-## Optimized Draft Based on Preseason Rankings
-
 ## Playoff Projections for 2019 ESPN Fantasy Football Leagues
 I use the preseason player projections from fantasyfootballanalytics.net to 
 To get the team names, owners, schedule, team records and team rosters, I use an ESPN Fantasy Football API connection from https://github.com/cwendt94/ff-espn-api.
@@ -26,3 +24,5 @@ Predictions for who each team will keep in keeper league.
 Player rater that has rest-of-season and keeper values for each player.
 
 Historical draft-rater and waivers-rater for each manager in league.
+
+## Optimized Draft Based on Preseason Rankings
