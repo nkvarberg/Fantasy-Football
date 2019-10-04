@@ -25,4 +25,9 @@ Player rater that has rest-of-season and keeper values for each player.
 
 Historical draft-rater and waivers-rater for each manager in league.
 
+'Games' tab where you get predictions for each game and can see how potential outcome affects your playoff percentages.
+
 ## Optimized Draft Based on Preseason Rankings
+
+## To do:
+Show change vs last week as a column in datatable
