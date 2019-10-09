@@ -35,15 +35,39 @@ ID,Owner,Team,Wins,Losses,proj_ppg,Playoffs,Semifinals,Finals,Champion,Week
 3,Henry,Minshew Mania,1,1,105.69,0.38,0.23,0.1,0.05,2
 4,Nick J,Barberque Kittle Chips,0,2,109.58,0.32,0.2,0.09,0.05,2
 1,Hunt,Weakest of Will Fuller V,0,2,103.06,0.22,0.13,0.06,0.03,2
-2,Tim,Ground’n Pound,3,0,127.67,0.902,0.751,0.442,0.254,3
+2,Tim,Ground’n Pound,3,0,127.67,0.902,0.7509999999999999,0.442,0.254,3
 9,Griff,Le'Veon la Vida Loca,2,1,117.56,0.687,0.475,0.24,0.118,3
 12,Sam,Hot Chubb Time Machine,1,2,116.84,0.517,0.341,0.174,0.094,3
-5,Chance,Turn Down 4 Nette?!,3,0,111.89,0.681,0.438,0.2,0.084,3
+5,Chance,Turn Down 4 Nette?!,3,0,111.89,0.6809999999999999,0.438,0.2,0.084,3
 6,Plaz,"Take Mahomes, Country Road ",2,1,113.1,0.564,0.36,0.17,0.079,3
 7,Tucker,United States  Of Kamaraca,2,1,111.98,0.584,0.368,0.17,0.077,3
 8,Varbs,Windy City Miracle,1,2,113.68,0.459,0.289,0.146,0.073,3
-10,TJ,Cheaper by  the Cousins 2,2,1,111.04,0.538,0.333,0.151,0.069,3
+10,TJ,Cheaper by  the Cousins 2,2,1,111.04,0.5379999999999999,0.333,0.151,0.069,3
 4,Nick J,Barberque Kittle Chips,1,2,112.44,0.431,0.27,0.131,0.066,3
 11,Peter,Cookin’ up dope wit da uzi,0,3,111.78,0.268,0.17,0.085,0.047,3
 3,Henry,Minshew Mania,1,2,104.1,0.279,0.157,0.071,0.03,3
-1,Hunt,Bye Week,0,3,96.01,0.091,0.048,0.019,0.009,3
+1,Hunt,Bye Week,0,3,96.01,0.091,0.048,0.019,0.009000000000000001,3
+2,Tim,Ground’n Pound,4,0,126.16,0.9470000000000001,0.812,0.48,0.271,4
+9,Griff,Le'Veon la Vida Loca,3,1,118.91,0.813,0.5920000000000001,0.309,0.156,4
+8,Varbs,Windy City Miracle,2,2,116.93,0.63,0.415,0.213,0.11,4
+12,Sam,Hot Chubb Time Machine,2,2,117.4,0.612,0.406,0.21,0.109,4
+6,Plaz,"Take Mahomes, Country Road ",3,1,111.81,0.669,0.419,0.193,0.087,4
+10,TJ,Cheaper by  the Cousins 2,2,2,110.69,0.527,0.314,0.145,0.068,4
+7,Tucker,United States  Of Kamaraca,3,1,108.43,0.627,0.373,0.156,0.064,4
+5,Chance,Turn Down 4 Nette?!,3,1,107.95,0.575,0.34299999999999997,0.149,0.064,4
+11,Peter,Cookin’ up dope wit da uzi,0,4,110.11,0.182,0.107,0.054000000000000006,0.028999999999999998,4
+4,Nick J,Barberque Kittle Chips,1,3,103.71,0.231,0.126,0.054000000000000006,0.025,4
+3,Henry,Minshew Mania,1,3,96.58,0.13,0.065,0.025,0.011000000000000001,4
+1,Hunt,The MinShow,0,4,94.85,0.057,0.028999999999999998,0.012,0.006,4
+2,Tim,Ground’n Pound,5,0,126.56,0.972,0.853,0.493,0.274,5
+9,Griff,Le'Veon la Vida Loca,4,1,122.61,0.89,0.684,0.374,0.196,5
+8,Varbs,Windy City Miracle,3,2,118.03,0.7,0.46,0.23,0.117,5
+12,Sam,Hot Chubb Time Machine,2,3,119.21,0.551,0.354,0.182,0.098,5
+10,TJ,Cheaper by  the Cousins 2,3,2,114.83,0.673,0.414,0.197,0.092,5
+5,Chance,Turn Down 4 Nette?!,4,1,111.12,0.741,0.451,0.199,0.083,5
+6,Plaz,"Take Mahomes, Country Road ",3,2,107.05,0.486,0.263,0.11,0.047,5
+7,Tucker,United States  Of Kamaraca,3,2,105.13,0.468,0.244,0.097,0.04,5
+4,Nick J,Barberque Kittle Chips,2,3,106.25,0.323,0.174,0.073,0.033,5
+11,Peter,Cookin’ up dope wit da uzi,0,5,106.58,0.081,0.046,0.022,0.011,5
+3,Henry,Hotel Odell Holiday Inn,1,4,97.29,0.085,0.041,0.016,0.007,5
+1,Hunt,The MinShow,0,5,97.28,0.032,0.017,0.007,0.003,5

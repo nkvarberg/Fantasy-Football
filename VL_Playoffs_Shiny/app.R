@@ -26,23 +26,19 @@ get_history_plot <- function(historydf, var_to_plot){
     arrange(desc(Week)) %>%
     arrange(desc(.[[3]]))
   history[,3] <- history[,3]*100
-  # try dynamic legend
-  if (var_to_plot == 'Playoffs'){
-    ylimits=NULL
-  }
-  else{
-    ylimits=NULL
-  }
-    
+  color_palette = c('#66FF33', '#000000', '#FF6666', '#006600',
+                    '#0033FF', '#660066', '#663300', '#FFCC00',
+                    '#FF9966', '#FF0033', '#3399FF', '#666666')
   p <- ggplot(history,aes_string(x='Week', y=var_to_plot, group='Owner'), show.legend = FALSE) + 
     geom_line(aes(color=Owner)) + 
     geom_point(aes(color=Owner)) +
     theme_minimal() +
     geom_text(data=subset(history, Week == max(Week)),
-              hjust = 0, nudge_x = rep_len(c(0.03,.3),length(unique(history$Owner))), 
+              hjust = 0, nudge_x = rep_len(c(0.03,.4),length(unique(history$Owner))), 
               aes(label=Owner, color=Owner)) +
-    scale_x_continuous(limits = c(0,WEEK+0.5), breaks=0:WEEK, labels=waiver()) +
-    scale_y_continuous(name = paste(var_to_plot,'%'), limits = ylimits) +
+    scale_color_manual(values=color_palette) +
+    scale_x_continuous(limits = c(0,WEEK+0.75), breaks=0:WEEK, labels=waiver(), name = 'After Week') +
+    scale_y_continuous(name = paste(var_to_plot,'%')) +
     theme(legend.position = "none")
   return(p)
 }
@@ -78,27 +74,47 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   
-   output$preds2019 <- DT::renderDataTable({
-     current <- df %>% 
-       filter(Week == WEEK) %>%
-       select(-c(ID,Team, Week)) %>% 
-       unite('Rec',c(Wins,Losses), sep='-', remove=TRUE) %>%
-       rename('Proj_PPG' = proj_ppg) %>%
-       mutate(Proj_PPG = round(Proj_PPG, 1)) %>%
-       mutate('Playoffs' = percent(Playoffs, accuracy=.1)) %>% 
-       mutate('Semifinals' = percent(Semifinals, accuracy=.1)) %>%
-       mutate('Finals' = percent(Finals, accuracy=.1)) %>%
-       mutate('Champion' = percent(Champion, accuracy=.1))
-     currentDT <- DT::datatable(current,
-                         options = list(dom = 't', pageLength = 12,
-                                            fixedColumns = list(leftColumns = 1, rightColumns = 0),
-                                            autoWidth = TRUE,
-                                            columnDefs = list( list( className = 'dt-center', targets = 1:7),
-                                                               list(width = '100px', targets = "_all"))
-                                            )
-                         )
-     return(currentDT)
-   })
+  output$preds2019 <- DT::renderDataTable({
+    
+    P_Change = rep(0, length(unique(df$ID)))
+    Ch_Change = rep(0, length(unique(df$ID)))
+    Win_Change = rep('L', length(unique(df$ID)))
+    if (WEEK > 0){
+      ids <- filter(df, Week == WEEK)$ID
+      for (i  in 1:length(ids)){
+        id = ids[i]
+        current = df %>% filter(Week == WEEK) %>% filter(ID == id) %>% select(Playoffs, Champion, Wins)
+        last = df %>% filter(Week == WEEK-1) %>% filter(ID == id) %>% select(Playoffs, Champion, Wins)
+        P_Change[i] = round(current$Playoffs - last$Playoffs, 3)
+        Ch_Change[i] = round(current$Champion - last$Champion, 3)
+        if (current$Wins - last$Wins == 1){
+          Win_Change[i] = 'W' 
+        }
+      }
+    }
+    
+    current <- df %>% 
+      filter(Week == WEEK) %>%
+      unite('Rec',c(Wins,Losses), sep='-', remove=TRUE) %>%
+      mutate('Last' = Win_Change) %>%
+      rename('Proj_PPG' = proj_ppg) %>%
+      mutate(Proj_PPG = round(Proj_PPG, 1)) %>%
+      mutate('Playoffs' = Playoffs*100) %>% 
+      mutate('±Plyf' = P_Change*100) %>%
+      mutate('Champion' = Champion*100) %>%
+      mutate('±Chmp' = Ch_Change*100) %>%
+      select(Owner, Rec, Last, Proj_PPG, Playoffs, '±Plyf', Champion, '±Chmp') %>%
+      arrange(Champion)
+    currentDT <- DT::datatable(current,
+                               options = list(dom = 't', pageLength = 12,
+                                              fixedColumns = list(leftColumns = 1, rightColumns = 0),
+                                              autoWidth = TRUE,
+                                              columnDefs = list( list( className = 'dt-center', targets = 1:7),
+                                                                 list(width = '100px', targets = "_all"))
+                               )
+    )
+    return(currentDT)
+  })
    
   output$Playoffplot <- renderPlot({
      p <- get_history_plot(df, 'Playoffs')
