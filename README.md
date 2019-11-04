@@ -1,5 +1,5 @@
 # Fantasy-Football
-Playoff predictions for managers in an ESPN Fantasy Football League.
+Predictions for which managers will make the playoffs in an ESPN Fantasy Football League.
 
 ### Playoff Projections for 2019 ESPN Fantasy Football Leagues
 I use the preseason player projections from fantasyfootballanalytics.net to 
