@@ -16,6 +16,10 @@ I show how predictions for each team's playoff chances have changed over time:
 ![playoffs](https://github.com/nkvarberg/Fantasy-Football/blob/master/Screenshots/Playoffs.png)
 
 ### Future Features
+Playoff BYE Week predictions for VL and MV.
+
+Head to Head Playoff Tiebreaker for VL.
+
 Predictions for whom each manager will select as a keeper.
 
 Player rater that has rest-of-season and keeper values for each player.
